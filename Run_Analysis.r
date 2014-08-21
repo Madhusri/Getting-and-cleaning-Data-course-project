@@ -29,7 +29,6 @@ colnames(yTrain)        = "activityId";
 
  
 # cCreate the final training set by merging yTrain, subjectTrain, and xTrain 
-
  trainingData = cbind(yTrain,subjectTrain,xTrain); 
 
  
@@ -46,12 +45,10 @@ colnames(yTest)       = "activityId";
  
  
 # Create the final test set by merging the xTest, yTest and subjectTest data 
-
 testData = cbind(yTest,subjectTest,xTest); 
 
  
 # Combine training and test data to create a final data set 
-
 finalData = rbind(trainingData,testData); 
 
  
@@ -64,24 +61,20 @@ colNames  = colnames(finalData);
 
  
 # Create a logicalVector that contains TRUE values for the ID, mean() & stddev() columns and FALSE for others 
-
  logicalVector = (grepl("activity..",colNames) | grepl("subject..",colNames) | grepl("-mean..",colNames) & !grepl("-meanFreq..",colNames) & !grepl("mean..-",colNames) | grepl("-std..",colNames) & !grepl("-std()..-",colNames)); 
 
  
 # Subset finalData table based on the logicalVector to keep only desired columns 
-
 finalData = finalData[logicalVector==TRUE]; 
 
  
 ** 3. Use descriptive activity names to name the activities in the data set** 
  
  # Merge the finalData set with the acitivityType table to include descriptive activity names 
-
  finalData = merge(finalData,activityType,by='activityId',all.x=TRUE); 
 
 
  # Updating the colNames vector to include the new column names after merge 
-
  colNames  = colnames(finalData);  
  
  
